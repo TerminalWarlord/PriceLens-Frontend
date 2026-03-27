@@ -1,15 +1,29 @@
-import { IconSearch } from '@tabler/icons-react';
+import { ThemeProvider } from './components/theme-provider';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from './components/pages/Home';
+import Header from './components/layout/Header';
+import SearchPage from './components/pages/SearchPage';
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Header />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
+      {
+        path: '/search',
+        element: <SearchPage />
+      }
+    ]
+  }
+])
 function App() {
-
-  return <div>
-    <h1 className="text-4xl font-bold leading-10 flex items-center">
-      <IconSearch className='text-blue-600 w-8 h-8' />
-      <span className='pl-2 text-neutral-900'>Price</span>
-      <span className='text-blue-600'>Lens</span>
-    </h1>
-    <p className='text-neutral-600'>Compare tech prices across Bangladesh, find the best deal instantly.</p>
-  </div>
+  return <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <RouterProvider router={router} />
+  </ThemeProvider >
 }
 
 export default App
