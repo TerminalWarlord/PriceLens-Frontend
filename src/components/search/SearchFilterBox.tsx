@@ -8,7 +8,7 @@ const SearchFilterBox = () => {
             <p className="text-xs uppercase tracking-wider">Filters</p>
             <PriceFilter />
             <ProviderFilter />
-            <Button className="mt-4">Filter</Button>
+            <Button className="mt-4 ">Filter</Button>
         </div>
     )
 }

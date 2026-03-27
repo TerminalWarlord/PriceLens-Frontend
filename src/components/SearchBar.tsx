@@ -4,6 +4,7 @@ import { Button } from "./ui/button"
 import { cn } from "../lib/utils"
 import { useEffect, useRef } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { toast } from "sonner"
 
 type Props = {
     className?: string
@@ -15,14 +16,15 @@ const SearchBar = ({ className }: Props) => {
     useEffect(() => {
         if (!inputRef.current) return;
         inputRef.current.value = searchParams.get('query') || "";
-    }, []);
+    }, [searchParams]);
 
     const handleSearch = () => {
         if (!inputRef || !inputRef.current) {
-            // toas
+            toast.error("Failed to search!");
             return;
         }
-        navigate(`/search?query=${inputRef.current.value}`)
+        searchParams.set('query', inputRef.current.value);
+        navigate(`/search?${searchParams.toString()}`);
     }
 
     return (

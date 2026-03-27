@@ -57,6 +57,7 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
           </div>
           <a
             href={product.product_url}
+            target="_blank"
             className="
     flex space-x-1 text-xs items-center
     transform transition-all duration-300 ease-in-out

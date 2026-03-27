@@ -19,6 +19,8 @@ export const SortBy = {
 export type SortBy =
 	(typeof SortBy)[keyof typeof SortBy];
 
+export type SortOrder = "ASC" | "DESC";
+
 export interface Product {
 	id: number;
 	product_name: string;

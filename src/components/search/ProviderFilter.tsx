@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom"
 import { Checkbox } from "../ui/checkbox"
 import { Field, FieldContent, FieldLabel } from "../ui/field"
 
@@ -8,7 +9,7 @@ const PROVIDERS = [
     },
     {
         name: "Ryans",
-        Value: "RYANS"
+        value: "RYANS"
     },
     {
         name: "Tech Land",
@@ -32,6 +33,8 @@ const PROVIDERS = [
     },
 ]
 const ProviderFilter = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const params = new URLSearchParams(searchParams);
     return (
         <div>
             <p className="text-sm font-medium my-2">Provider</p>
@@ -40,7 +43,19 @@ const ProviderFilter = () => {
                     <Checkbox
                         id="terms-checkbox-2"
                         name={provider.value}
-                        defaultChecked
+                        checked={searchParams.getAll('providers').includes(provider.value)}
+                        onCheckedChange={(checked) => {
+                            let updatedProviders = params.getAll('providers');
+                            if (updatedProviders.includes(provider.value) && !checked) {
+                                updatedProviders = updatedProviders.filter(p => p !== provider.value)
+                            }
+                            else if (!updatedProviders.includes(provider.value) && checked) {
+                                updatedProviders.push(provider.value);
+                            }
+                            params.delete('providers');
+                            updatedProviders.forEach(p => params.append("providers", p));
+                            setSearchParams(params);
+                        }}
                     />
                     <FieldContent>
                         <FieldLabel htmlFor="terms-checkbox-2" className="font-light">
