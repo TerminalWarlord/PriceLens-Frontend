@@ -1,4 +1,3 @@
-import { Button } from "../ui/button"
 import { PriceFilter } from "./PriceFilter"
 import ProviderFilter from "./ProviderFilter"
 
