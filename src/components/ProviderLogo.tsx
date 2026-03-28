@@ -8,7 +8,8 @@ const ProviderImgMap = {
     "COMPUTER_VILLAGE": "./computer_village.png",
     "TECH_MARVELS": "./tech_marvels.png",
     "APPLE_GADGETS": "./apple_gadgets.png",
-    "VERTECH": "./apple_gadgets.png"
+    "VERTECH": "./apple_gadgets.png",
+    "UCC": "./ucc.png",
 } as const;
 const ProviderLogo = ({ provider }: { provider: ProductProvider }) => {
     const logo = ProviderImgMap[provider]

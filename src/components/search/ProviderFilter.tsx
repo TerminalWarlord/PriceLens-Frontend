@@ -28,6 +28,10 @@ const PROVIDERS = [
         value: "APPLE_GADGETS"
     },
     {
+        name: "UCC",
+        value: "UCC"
+    },
+    {
         name: "Vertech",
         value: "VERTECH"
     },
