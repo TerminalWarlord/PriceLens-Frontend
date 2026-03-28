@@ -16,7 +16,9 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
 
 
   return (
-    <div
+    <a
+      href={product.product_url}
+      target="_black"
       className={cn(`
     group
     border my-4 p-4 rounded-2xl flex flex-col md:flex-row space-x-4 bg-neutral-50
@@ -71,7 +73,7 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
           </a>
         </div>
       </div>
-    </div>
+    </a>
   )
 }
 
