@@ -26,7 +26,7 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
       <div>
         {isFirst && <p className="absolute top-3 left-3 flex space-x-1 px-2.5 py-0.5 border bg-primary rounded-xl items-center text-white tracking-wide">
           <IconStarFilled className="w-3 h-3" />
-          <span className="text-xs uppercase">Best Deal</span>
+          <span className="text-xs uppercase">Best Match</span>
         </p>
         }
         <img
@@ -47,11 +47,11 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
         <div className="flex w-full justify-between relative overflow-clip">
           <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 space-x-0 md:space-x-4">
             <p className="text-xs text-neutral-500 flex items-center">
-              <IconClock className="w-4 h-4" />
+              <IconClock className="w-4 h-4 pr-1" />
               <span>{new Date(product.created_at).toDateString()}</span>
             </p>
             <p className="text-xs text-neutral-500 flex items-center">
-              <IconRefresh className="w-4 h-4" />
+              <IconRefresh className="w-4 h-4 pr-1" />
               <span>{new Date(product.updated_at).toDateString()}</span>
             </p>
           </div>

@@ -23,7 +23,7 @@ const Home = () => {
                 <IconTrendingUp />
                 {TRENDING_KEYWORD.map(keyword => {
                     return <Link
-                        to={`/search?${keyword}`}
+                        to={`/search?query=${keyword}`}
                         key={keyword}
                         className='text-xs border px-2 h-fit py-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 '
                     >
