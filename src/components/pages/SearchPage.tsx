@@ -12,7 +12,8 @@ import { PackageOpen } from "lucide-react"
 import ManageFilters from "../search/ManageFilters"
 import Pagination from "../Pagination"
 
-const BACKEND_URL = 'http://localhost:6011'
+const BACKEND_URL = 'https://api-pricelens.joybiswas.com'
+
 const fetcher = async (urlPath: string) => {
     try {
         const r = await fetch(BACKEND_URL + urlPath);
@@ -45,7 +46,7 @@ const SearchPage = () => {
     }, [error]);
     return (
         <div>
-            <SearchBar className="w-full mt-20" />
+            <SearchBar className="w-full! mt-20" />
             <div className="grid grid-cols-1 md:grid-cols-[1fr_6fr] w-full">
                 <div className="hidden md:block">
                     <SearchFilterBox />

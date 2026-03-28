@@ -7,9 +7,9 @@ const Menu = () => {
         <>
             <Link to={'/terms-of-use'}>Terms of use</Link>
             <Link to={'/disclaimer'}>Disclaimer</Link>
-            <Link to={'/privacy-policy'}>Privacy Policy</Link>
+            {/* <Link to={'/privacy-policy'}>Privacy Policy</Link> */}
             <div className='flex items-center space-x-3'>
-                <a href="https://github.com/TerminalWarlord/PriceLens-Frontend"><IconBrandGithub className="w-5 h-5" /></a>
+                <a href="https://github.com/TerminalWarlord/PriceLens"><IconBrandGithub className="w-5 h-5" /></a>
                 <ModeToggle />
             </div>
         </>

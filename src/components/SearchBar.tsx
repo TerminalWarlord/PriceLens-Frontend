@@ -31,7 +31,7 @@ const SearchBar = ({ className }: Props) => {
         <div
             className={cn(`
             rounded-4xl flex 
-            h-14 w-2/6
+            h-14 w-full md:w-3/6 lg:w-3/6
             bg-white dark:bg-black
             focus-within:ring-1
             focus-within:ring-blue-400

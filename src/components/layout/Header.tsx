@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Menu from "./Menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 import { Button } from "../ui/button"
@@ -42,9 +42,7 @@ const Header = () => {
                     </div>
                 </nav>
             </header>
-            <main className="px-8 mt-16">
-                <Outlet />
-            </main>
+
         </>
     )
 }
