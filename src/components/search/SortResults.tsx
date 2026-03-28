@@ -58,6 +58,7 @@ const SortResults = () => {
                                 px-2 py-1.5 rounded-md text-xs w-full"
             >
                 <option value={SortBy.PRODUCT_PRICE}>Price</option>
+                <option value={SortBy.RELEVANCE}>Relevance</option>
                 <option value={SortBy.CREATED_AT}>Date Added</option>
                 <option value={SortBy.UPDATED_AT}>Date Updated</option>
             </select>

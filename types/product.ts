@@ -11,6 +11,7 @@ export type ProductProvider =
 	(typeof ProductProvider)[keyof typeof ProductProvider];
 
 export const SortBy = {
+	RELEVANCE: "relevance",
 	PRODUCT_PRICE: "product_price",
 	CREATED_AT: "created_at",
 	UPDATED_AT: "updated_at",
