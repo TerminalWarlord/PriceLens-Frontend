@@ -6,6 +6,11 @@ export const ProductProvider = {
 	TECH_MARVELS: "TECH_MARVELS",
 	VERTECH: "VERTECH",
 	APPLE_GADGETS: "APPLE_GADGETS",
+	DAZZLE: "DAZZLE",
+	SKYLANDBD: "SKYLANDBD",
+	POTAKAIT: "POTAKAIT",
+	ULTRATECH: "ULTRATECH",
+	VIBEGAMING: "VIBEGAMING",
 } as const;
 export type ProductProvider =
 	(typeof ProductProvider)[keyof typeof ProductProvider];
