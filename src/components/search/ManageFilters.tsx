@@ -26,7 +26,6 @@ const ManageFilters = () => {
     }
     return (
         <div className='flex flex-wrap space-x-1 my-2 space-y-2'>
-            {JSON.stringify(searchParams.forEach((p, k) => console.log(p, k)))}
             {items && items.length > 0 && items.map(v => {
                 return <div className='flex space-x-1 border px-2 py-1.5 bg-neutral-300/30 rounded-2xl w-fit text-xs items-center h-fit'>
                     <p>{FilterNames[v.key]}: </p>
@@ -37,6 +36,18 @@ const ManageFilters = () => {
                     />
                 </div>
             })}
+            {items && items.length > 0 && <div className='flex space-x-1 border px-2 py-1.5  text-white bg-red-500/80 rounded-2xl w-fit text-xs items-center h-fit'>
+                <p>Reset</p>
+                <IconX
+                    className='w-4 h-4 hover:text-primary cursor-pointer'
+                    onClick={() => {
+                        searchParams.delete('providers');
+                        searchParams.delete('min_price');
+                        searchParams.delete('max_price');
+                        setSearchParams(searchParams);
+                    }}
+                />
+            </div>}
 
         </div>
     )

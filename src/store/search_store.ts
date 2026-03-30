@@ -2,14 +2,14 @@ import { create } from "zustand";
 import { SortBy, type ProductProvider, type SortOrder } from "../../types/product";
 
 type SearchState = {
-    providers: ProductProvider[] | null;
     sortBy: SortBy;
     sortOrder: SortOrder;
     minPrice: number | null;
     maxPrice: number | null;
+    selectedProviders: ProductProvider[];
     updateSortBy: (s: SortBy) => void;
     updateSortOrder: (s: SortOrder) => void;
-    updateProviders: (p: ProductProvider[] | null) => void;
+    updateProviders: (p: ProductProvider[]) => void;
     updatePrice: (prices: number[]) => void;
 }
 
@@ -19,6 +19,7 @@ export const useSearchFilterStore = create<SearchState>((set) => ({
     minPrice: null,
     sortBy: SortBy.PRODUCT_PRICE,
     sortOrder: "ASC",
+    selectedProviders: [],
     updatePrice(prices) {
         set({
             minPrice: prices[0],
@@ -26,12 +27,12 @@ export const useSearchFilterStore = create<SearchState>((set) => ({
         });
     },
     updateProviders(p) {
-        set({ providers: p })
+        set({ selectedProviders: p })
     },
     updateSortBy(s) {
         set({ sortBy: s })
     },
     updateSortOrder(s) {
         set({ sortOrder: s })
-    },
+    }
 }));

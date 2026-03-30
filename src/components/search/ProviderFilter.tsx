@@ -1,82 +1,90 @@
 import { useSearchParams } from "react-router-dom"
 import { Checkbox } from "../ui/checkbox"
 import { Field, FieldContent, FieldLabel } from "../ui/field"
+import { ProductProvider } from "../../../types/product"
+import { useSearchFilterStore } from "../../store/search_store"
+import { useEffect } from "react"
 
 const PROVIDERS = [
     {
         name: "Star Tech",
-        value: "STARTECH"
+        value: ProductProvider.STARTECH
     },
     {
         name: "Ryans",
-        value: "RYANS"
+        value: ProductProvider.RYANS
     },
     {
         name: "Tech Land",
-        value: "TECHLAND"
+        value: ProductProvider.TECHLAND
     },
     {
         name: "Sky Land BD",
-        value: "SKYLANDBD"
+        value: ProductProvider.SKYLANDBD
     },
     {
         name: "Dazzle",
-        value: "DAZZLE"
+        value: ProductProvider.DAZZLE
     },
     {
         name: "Computer Village",
-        value: "COMPUTER_VILLAGE"
+        value: ProductProvider.COMPUTER_VILLAGE
     },
     {
         name: "Tech Marvels",
-        value: "TECH_MARVELS"
+        value: ProductProvider.TECH_MARVELS
     },
     {
         name: "Apple Gadgets",
-        value: "APPLE_GADGETS"
+        value: ProductProvider.APPLE_GADGETS
     },
     {
         name: "UCC",
-        value: "UCC"
+        value: ProductProvider.UCC
     },
     {
         name: "Vertech",
-        value: "VERTECH"
+        value: ProductProvider.VERTECH
     },
 ]
 const ProviderFilter = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const params = new URLSearchParams(searchParams);
+    const [searchParams] = useSearchParams();
+    const selectedProviders = useSearchFilterStore(state => state.selectedProviders);
+    const updateProviders = useSearchFilterStore(state => state.updateProviders);
+    useEffect(() => {
+        const currentProviders = searchParams.getAll('providers').map(p => p as ProductProvider);
+        updateProviders(currentProviders);
+    }, [searchParams, updateProviders]);
     return (
         <div>
             <p className="text-sm font-medium my-2">Provider</p>
             {PROVIDERS.map(provider => {
-                return <Field orientation="horizontal" key={provider.value} className="my-1.5">
+                return <Field
+                    orientation="horizontal"
+                    key={provider.value}
+                    className="my-1.5"
+                >
                     <Checkbox
-                        id="terms-checkbox-2"
+                        id={provider.value}
                         name={provider.value}
-                        checked={searchParams.getAll('providers').includes(provider.value)}
-                        onCheckedChange={(checked) => {
-                            let updatedProviders = params.getAll('providers');
-                            if (updatedProviders.includes(provider.value) && !checked) {
-                                updatedProviders = updatedProviders.filter(p => p !== provider.value)
+                        className="cursor-pointer"
+                        checked={selectedProviders.includes(provider.value as ProductProvider)}
+                        onCheckedChange={() => {
+                            if (selectedProviders.includes(provider.value)) {
+                                updateProviders(selectedProviders.filter(p => p !== provider.value));
                             }
-                            else if (!updatedProviders.includes(provider.value) && checked) {
-                                updatedProviders.push(provider.value);
+                            else {
+                                updateProviders([...selectedProviders, provider.value]);
                             }
-                            params.delete('providers');
-                            updatedProviders.forEach(p => params.append("providers", p));
-                            setSearchParams(params);
                         }}
                     />
                     <FieldContent>
-                        <FieldLabel htmlFor="terms-checkbox-2" className="font-light">
+                        <FieldLabel htmlFor={provider.value} className="font-light cursor-pointer">
                             {provider.name}
                         </FieldLabel>
                     </FieldContent>
                 </Field>
             })}
-
         </div>
     )
 }
