@@ -15,7 +15,10 @@ const PROVIDERS = [
         name: "Tech Land",
         value: "TECHLAND"
     },
-
+    {
+        name: "Sky Land BD",
+        value: "SKYLANDBD"
+    },
     {
         name: "Dazzle",
         value: "DAZZLE"
