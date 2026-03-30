@@ -1,4 +1,5 @@
 import { ProductProvider } from "../../types/product"
+import { cn } from "../lib/utils";
 
 
 const ProviderImgMap = {
@@ -18,10 +19,18 @@ const ProviderImgMap = {
 } as const;
 const ProviderLogo = ({ provider }: { provider: ProductProvider }) => {
     const logo = ProviderImgMap[provider]
+    const providerClassName = () => {
+        if (provider === ProductProvider.TECHLAND) {
+            return "dark:invert-100 invert-0";
+        }
+        else if (provider === ProductProvider.COMPUTER_VILLAGE) {
+            return "invert-100 dark:invert-0";
+        }
+    }
     return (
         <img
             src={logo}
-            className="h-3 md:h-5 my-2"
+            className={cn(`h-3 md:h-5 my-2 `, providerClassName())}
         />
     )
 }
