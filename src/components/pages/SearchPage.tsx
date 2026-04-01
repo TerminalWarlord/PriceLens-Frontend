@@ -6,11 +6,11 @@ import type { Product } from "../../../types/product"
 import { useEffect } from "react"
 import useSWR from 'swr'
 import { toast } from "sonner"
-import { Skeleton } from "../ui/skeleton"
 import SortResults from "../search/SortResults"
 import { PackageOpen } from "lucide-react"
 import ManageFilters from "../search/ManageFilters"
 import Pagination from "../Pagination"
+import { IconLoader2 } from "@tabler/icons-react"
 
 const BACKEND_URL = 'https://api-pricelens.joybiswas.com'
 
@@ -58,9 +58,9 @@ const SearchPage = () => {
 
                     </div>
                     <ManageFilters />
-                    {isLoading && Array(5).fill(0).map(() => {
-                        return <Skeleton className="h-44 w-full rounded-2xl border my-3" />
-                    })}
+                    {isLoading && <div className="w-full flex items-center justify-center h-80 md:h-72 lg:h-96">
+                        <IconLoader2 className="animate-spin" />
+                    </div>}
                     {data && data.products.length > 0 && data.products.map((product, idx) => {
                         return <ProductCard
                             product={product as unknown as Product}
@@ -73,7 +73,7 @@ const SearchPage = () => {
                         <p className="text-sm text-neutral-700 dark:text-neutral-200 tracking-wide my-2">No products found</p>
                     </div>}
 
-                    <Pagination hasNextPage={data?.hasNextPage ?? false} />
+                    {data && data?.products.length > 0 && <Pagination hasNextPage={data?.hasNextPage ?? false} />}
                 </div>
             </div>
         </div>
