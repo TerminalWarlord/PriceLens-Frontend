@@ -33,7 +33,7 @@ const SortResults = () => {
                         </Button>
 
                     </SheetTrigger>
-                    <SheetContent side="left">
+                    <SheetContent side="left" className="z-1000">
                         <SearchFilterBox />
                     </SheetContent>
                 </Sheet>

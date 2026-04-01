@@ -58,7 +58,7 @@ const CompareDialog = ({ product }: { product: Product }) => {
                         <span className="text-xs md:text-sm">Compare</span>
                     </Button>
                 </DialogTrigger>
-                <DialogContent className="min-w-fit max-h-[calc(100vh-3rem)] flex flex-col">
+                <DialogContent className="min-w-fit max-h-[calc(100vh-3rem)] flex flex-col z-1000">
                     <DialogHeader>
                         <DialogTitle>Compare Products</DialogTitle>
                     </DialogHeader>

@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <>
             <header>
-                <nav className="px-8 py-4 absolute top-0 bg-neutral-50/5 dark:bg-neutral-700/5 backdrop-blur-2xl w-full flex justify-between items-center">
+                <nav className="px-8 py-4 fixed top-0 left-0 right-0 z-100 bg-neutral-50/5 dark:bg-neutral-700/5 backdrop-blur-2xl w-full flex justify-between items-center">
                     <div>
                         <Link to={'/'}>
                             <h1 className="tracking-tighter font-bold text-xl">PriceLens</h1>
@@ -26,7 +26,7 @@ const Header = () => {
                             </SheetTrigger>
                             <SheetContent
                                 side={"right"}
-                                className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
+                                className="z-1000 data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
                             >
                                 <SheetHeader>
                                     <SheetTitle>Navigation</SheetTitle>
