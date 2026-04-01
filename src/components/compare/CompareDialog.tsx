@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import CompareSearchResultCard from "./CompareSearchResultCard"
 import CompareItem from "./CompareItem"
+import { usePostHog } from "@posthog/react"
 
 
 
@@ -23,6 +24,7 @@ const fetcher = async (path: string) => {
 }
 const CompareDialog = ({ product }: { product: Product }) => {
     const [query, setQuery] = useState<string | null>(null);
+    const posthog = usePostHog();
     const [debouncedQuery, setDebouncedQuery] = useState<string | null>(null);
     const { data, isLoading, error } = useSWR(`/search?query=${debouncedQuery}&sort_by=relevance&limit=5`, debouncedQuery ? fetcher : null);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -31,6 +33,14 @@ const CompareDialog = ({ product }: { product: Product }) => {
         const timer = setTimeout(() => setDebouncedQuery(query), 300);
         return () => clearTimeout(timer);
     }, [query]);
+
+    useEffect(() => {
+        if (!debouncedQuery) return;
+
+        posthog.capture('comparison_product_search', {
+            query: debouncedQuery
+        });
+    }, [debouncedQuery]);
 
     useEffect(() => {
         if (error) {
@@ -44,6 +54,12 @@ const CompareDialog = ({ product }: { product: Product }) => {
     }, []);
 
     const handleProductSelection = (p: Product) => {
+        posthog.capture('select_product_to_compare', {
+            query,
+            original_product_name: product.product_name,
+            product_id: p.id,
+            product_name: p.product_name
+        });
         setSelectedProduct(p);
     }
 

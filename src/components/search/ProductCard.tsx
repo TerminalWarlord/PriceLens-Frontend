@@ -6,6 +6,7 @@ import { cn } from "../../lib/utils";
 import ProviderLogo from "../ProviderLogo";
 import CompareDialog from "../compare/CompareDialog";
 import { Button } from "../ui/button";
+import { usePostHog } from "@posthog/react";
 
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 }
 const ProductCard = ({ product, className, isFirst }: Props) => {
   const formattedPrice = formatPrice(product.product_price);
+  const posthog = usePostHog();
 
 
   return (
@@ -66,15 +68,24 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
           </div>
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-x-2 md:space-x-0 md:flex-col md:space-y-2 py-3 md:py-0">
             <CompareDialog product={product} />
-            <Button variant={'outline'}>
-              <a
-                href={product.product_url}
-                className="flex space-x-1 cursor-pointer"
-              >
+            <a
+              href={product.product_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+              onClick={() => {
+                posthog.capture("product_opened", {
+                  product_name: product.product_name,
+                  product_price: product.product_price,
+                  product_url: product.product_url
+                });
+              }}
+            >
+              <Button variant="outline" className="flex space-x-1 w-full cursor-pointer">
                 <IconShoppingBag />
                 <span className="text-xs md:text-sm">View Store</span>
-              </a>
-            </Button>
+              </Button>
+            </a>
           </div>
         </div>
       </div>

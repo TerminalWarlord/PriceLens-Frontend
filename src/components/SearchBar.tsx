@@ -5,11 +5,13 @@ import { cn } from "../lib/utils"
 import { useEffect, useRef } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
+import { usePostHog } from "@posthog/react"
 
 type Props = {
     className?: string
 }
 const SearchBar = ({ className }: Props) => {
+    const posthog = usePostHog();
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -23,6 +25,7 @@ const SearchBar = ({ className }: Props) => {
             toast.error("Failed to search!");
             return;
         }
+        posthog.capture('product_search', { query: inputRef.current.value });
         searchParams.set('query', inputRef.current.value);
         navigate(`/search?${searchParams.toString()}`);
     }
