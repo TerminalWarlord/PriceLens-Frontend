@@ -17,7 +17,7 @@ const ProviderImgMap = {
     "ULTRATECH": "./ultra_tech.png",
     "VIBEGAMING": "./vibe_gaming"
 } as const;
-const ProviderLogo = ({ provider }: { provider: ProductProvider }) => {
+const ProviderLogo = ({ provider, className }: { provider: ProductProvider, className?: string }) => {
     const logo = ProviderImgMap[provider]
     const providerClassName = () => {
         if (provider === ProductProvider.TECHLAND) {
@@ -30,7 +30,7 @@ const ProviderLogo = ({ provider }: { provider: ProductProvider }) => {
     return (
         <img
             src={logo}
-            className={cn(`h-3 md:h-5 my-2 `, providerClassName())}
+            className={cn(`h-3 md:h-5 my-2 `, providerClassName(), className)}
         />
     )
 }

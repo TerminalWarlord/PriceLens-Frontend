@@ -1,9 +1,11 @@
 import { type Product } from "../../../types/product";
 import { formatPrice } from "../../lib/price_formatter";
 import { Separator } from "../ui/separator";
-import { IconArrowUpRight, IconClock, IconRefresh, IconStarFilled } from "@tabler/icons-react";
+import { IconClock, IconRefresh, IconShoppingBag, IconStarFilled } from "@tabler/icons-react";
 import { cn } from "../../lib/utils";
 import ProviderLogo from "../ProviderLogo";
+import CompareDialog from "../compare/CompareDialog";
+import { Button } from "../ui/button";
 
 
 type Props = {
@@ -16,9 +18,9 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
 
 
   return (
-    <a
-      href={product.product_url}
-      target="_black"
+    <div
+      // href={product.product_url}
+      // target="_black"
       className={cn(`
     group
     border my-4 p-4 rounded-2xl flex flex-col md:flex-row space-x-4 bg-neutral-50
@@ -42,38 +44,41 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
         <h1 className="text-md font-medium hover:text-primary cursor-pointer">{product.product_name}</h1>
         <p className="text-xs text-neutral-500 whitespace-pre-line line-clamp-8 leading-5 tracking-tight">{product.product_description}</p>
         <Separator className="my-2 w-full" />
-        <p className="font-mono text-[rgba(0,166,122,1)]">
-          <span>৳</span>
-          <span className="text-lg md:text-xl lg:text-2xl">{formattedPrice}</span>
-        </p>
-        <div className="flex w-full justify-between relative overflow-clip">
-          <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 space-x-0 md:space-x-4">
-            <p className="text-xs text-neutral-500 flex items-center">
-              <IconClock className="w-4 h-4 pr-1" />
-              <span>{new Date(product.created_at).toDateString()}</span>
+        <div className="flex flex-col md:flex-row justify-between">
+          <div className="flex w-full flex-col">
+            <p className="font-mono text-[rgba(0,166,122,1)]">
+              <span>৳</span>
+              <span className="text-lg md:text-xl lg:text-2xl">{formattedPrice}</span>
             </p>
-            <p className="text-xs text-neutral-500 flex items-center">
-              <IconRefresh className="w-4 h-4 pr-1" />
-              <span>{new Date(product.updated_at).toDateString()}</span>
-            </p>
+            <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 space-x-0 md:space-x-4">
+              <p className="text-xs text-neutral-500 flex items-center">
+                <IconClock className="w-4 h-4 pr-1" />
+                <span>{new Date(product.created_at).toDateString()}</span>
+              </p>
+              <p className="text-xs text-neutral-500 flex items-center">
+                <IconRefresh className="w-4 h-4 pr-1" />
+                <span>{new Date(product.updated_at).toDateString()}</span>
+              </p>
+            </div>
+            <div>
+
+            </div>
           </div>
-          <a
-            href={product.product_url}
-            target="_blank"
-            className="
-    flex space-x-1 text-xs items-center
-    transform transition-all duration-300 ease-in-out
-    translate-x-10 opacity-0
-    group-hover:translate-x-0 group-hover:opacity-100
-    group-hover:text-primary
-  "
-          >
-            <span>View Store</span>
-            <IconArrowUpRight />
-          </a>
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-x-2 md:space-x-0 md:flex-col md:space-y-2 py-3 md:py-0">
+            <CompareDialog product={product} />
+            <Button variant={'outline'}>
+              <a
+                href={product.product_url}
+                className="flex space-x-1 cursor-pointer"
+              >
+                <IconShoppingBag />
+                <span className="text-xs md:text-sm">View Store</span>
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
-    </a>
+    </div>
   )
 }
 
