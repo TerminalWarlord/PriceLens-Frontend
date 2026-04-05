@@ -15,7 +15,7 @@ type Props = {
   isFirst?: boolean;
 }
 const ProductCard = ({ product, className, isFirst }: Props) => {
-  const formattedPrice = formatPrice(product.product_price);
+  const formattedPrice = formatPrice(BigInt(product.product_price));
   const posthog = usePostHog();
 
 

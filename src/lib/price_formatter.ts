@@ -1,5 +1,5 @@
-export function formatPrice(price: number | bigint) {
-    const inTaka = (Number(price) / 100);
+export function formatPrice(price: bigint) {
+    const inTaka = (price / 100n);
     return inTaka.toLocaleString("en-BD", {
         maximumFractionDigits: 2,
     })

@@ -31,7 +31,7 @@ export type SortOrder = "ASC" | "DESC";
 export interface Product {
 	id: number;
 	product_name: string;
-	product_price: bigint;
+	product_price: string;
 	product_description: string;
 	product_provider: ProductProvider;
 	product_url: string;
