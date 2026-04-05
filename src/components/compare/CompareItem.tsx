@@ -4,7 +4,7 @@ import { formatPrice } from "../../lib/price_formatter";
 import ProviderLogo from "../ProviderLogo"
 
 const CompareItem = ({ product }: { product: Product }) => {
-    const formattedPrice = formatPrice(product.product_price);
+    const formattedPrice = formatPrice(BigInt(product.product_price));
     return (
         <div className="px-4 overflow-y-auto h-full min-h-0">
             <div className="flex items-center justify-center">

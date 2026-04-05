@@ -6,7 +6,7 @@ const CompareSearchResultCard = ({ product, selectProduct }: {
     product: Product,
     selectProduct: (p: Product) => void
 }) => {
-    const price = formatPrice(product.product_price);
+    const price = formatPrice(BigInt(product.product_price));
 
     return (
         <div
