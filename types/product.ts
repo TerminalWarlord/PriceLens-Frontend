@@ -36,6 +36,7 @@ export interface Product {
 	product_provider: ProductProvider;
 	product_url: string;
 	product_image: string;
+	price_change: string;
 	created_at: Date;
 	updated_at: Date;
 }

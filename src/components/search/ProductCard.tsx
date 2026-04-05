@@ -1,7 +1,7 @@
 import { type Product } from "../../../types/product";
-import { formatPrice } from "../../lib/price_formatter";
+import { formatPrice, getPriceChangePercentage } from "../../lib/price_formatter";
 import { Separator } from "../ui/separator";
-import { IconClock, IconRefresh, IconShoppingBag, IconStarFilled } from "@tabler/icons-react";
+import { IconClock, IconRefresh, IconShoppingBag, IconStarFilled, IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
 import { cn } from "../../lib/utils";
 import ProviderLogo from "../ProviderLogo";
 import CompareDialog from "../compare/CompareDialog";
@@ -17,7 +17,8 @@ type Props = {
 const ProductCard = ({ product, className, isFirst }: Props) => {
   const formattedPrice = formatPrice(BigInt(product.product_price));
   const posthog = usePostHog();
-
+  const isTrendUp = BigInt(product.price_change) > 0n;
+  const priceChangePercentage = getPriceChangePercentage(product.product_price, product.price_change);
 
   return (
     <div
@@ -51,6 +52,12 @@ const ProductCard = ({ product, className, isFirst }: Props) => {
             <p className="font-mono text-[rgba(0,166,122,1)]">
               <span>৳</span>
               <span className="text-lg md:text-xl lg:text-2xl">{formattedPrice}</span>
+              <div className={`flex space-x-1 items-center font-sans text-xs md:text-sm ${isTrendUp ? "text-[rgba(0,166,122,1)]" : "text-red-400"}`}>
+                {isTrendUp ? <IconTrendingUp className="w-4 h-4" /> : <IconTrendingDown className="w-4 h-4" />}
+                <span>{formatPrice(BigInt(product.price_change))}</span>
+                <span>({priceChangePercentage}%)</span>
+                <span className="text-neutral-500 border px-1.5 py-0.5 rounded-xl text-xs">48hrs</span>
+              </div>
             </p>
             <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 space-x-0 md:space-x-4">
               <p className="text-xs text-neutral-500 flex items-center">

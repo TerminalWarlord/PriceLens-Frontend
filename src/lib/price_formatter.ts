@@ -4,3 +4,8 @@ export function formatPrice(price: bigint) {
         maximumFractionDigits: 2,
     })
 }
+
+
+export function getPriceChangePercentage(price: string, priceChange: string) {
+    return (BigInt(priceChange) * 100n) / BigInt(price);
+}
